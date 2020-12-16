@@ -17,6 +17,9 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoic3VkaGlyLXBhd2FyIiwiYSI6ImNraXE5dXB2dzF1ZnQydnFqOGk0bWRkOWMifQ.CRXPEfe6cyizxx5UAYWFyA";
+
 const autoScroll = () => {
   const $newMessage = $messageContainer.lastElementChild;
 
@@ -47,15 +50,39 @@ socket.on("message", (message) => {
 });
 
 socket.on("locationMessage", (location) => {
-  console.log(location);
   $messageContainer.insertAdjacentHTML(
     "beforeend",
     Mustache.render($locationMessageTemplate, {
       username: location.username,
       locationURL: location.url,
       createdAt: moment(location.createdAt).format("h:mm A"),
+      timestamp: location.createdAt,
     })
   );
+  const coords = [location.coords.longitude, location.coords.latitude];
+  const map = new mapboxgl.Map({
+    container: `map-${location.username}-${location.createdAt}`,
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: coords,
+    zoom: 14,
+    interactive: false,
+  });
+  new mapboxgl.Marker().setLngLat(coords).addTo(map);
+
+  document
+    .querySelector(`#map-${location.username}-${location.createdAt}`)
+    .addEventListener("click", (e) => {
+      console.log(
+        document
+          .querySelector(".location-map-container")
+          .getAttribute("data-location-url")
+      );
+      window.open(
+        document
+          .querySelector(".location-map-container")
+          .getAttribute("data-location-url")
+      );
+    });
   autoScroll();
 });
 
