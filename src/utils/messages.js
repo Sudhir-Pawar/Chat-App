@@ -5,9 +5,10 @@ const generateMessage = (username, text) => {
     createdAt: new Date().getTime(),
   };
 };
-const generateLocationMessage = (username, url) => {
+const generateLocationMessage = (username, coords, url) => {
   return {
     username,
+    coords,
     url,
     createdAt: new Date().getTime(),
   };
