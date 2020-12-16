@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
     <title>Chat App</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/img/favicon.png">
@@ -47,7 +49,10 @@
                 <span class="message__name">{{username}}</span>
                 <span class="message__meta">{{createdAt}}</span>
             </p>
-            <p><a href={{locationURL}} target="_blank">My Current Location</a></p>
+            <!-- <p><a href={{locationURL}} target="_blank">My Current Location</a></p> -->
+            <div id="map-{{username}}-{{timestamp}}" class="location-map-container" data-location-url="{{locationURL}}">
+                <!-- <a href={{locationURL}} target="_blank"></a> -->
+            </div>
         </div>
     </script>
 
