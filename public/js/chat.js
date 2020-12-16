@@ -18,7 +18,7 @@ const { username, room } = Qs.parse(location.search, {
 });
 
 mapboxgl.accessToken =
-  "pk.eyJ1Ijoic3VkaGlyLXBhd2FyIiwiYSI6ImNraXE5dXB2dzF1ZnQydnFqOGk0bWRkOWMifQ.CRXPEfe6cyizxx5UAYWFyA";
+  "pk.eyJ1Ijoic3VkaGlyLXBhd2FyIiwiYSI6ImNraXExd3prbTFidmgyc281aHc3czBoczMifQ.CTHGiZNNrXSk4tIhGiaQgQ";
 
 const autoScroll = () => {
   const $newMessage = $messageContainer.lastElementChild;
