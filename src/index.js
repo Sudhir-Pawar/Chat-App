@@ -22,6 +22,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "../public")));
 
+app.get("/api/test", (req, res) => {
+  console.log(req.headers);
+  console.log(req.socket.remoteAddress);
+});
+
 io.on("connection", (socket) => {
   console.log("New websocket connection");
 
