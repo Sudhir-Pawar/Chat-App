@@ -25,6 +25,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/api/test", (req, res) => {
   console.log(req.headers);
   console.log(req.socket.remoteAddress);
+  res.json({
+    headers: req.headers,
+    remoteAddress: req.socket.remoteAddress,
+  });
 });
 
 io.on("connection", (socket) => {
