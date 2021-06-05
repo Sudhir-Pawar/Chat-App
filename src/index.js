@@ -31,7 +31,7 @@ app.get("/api/test", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket);
+  console.log(socket.id + " " + PORT);
   socket.on("join", (userInfo, callback) => {
     const { error, user } = addUser({ id: socket.id, ...userInfo });
     if (error) return callback(error);
@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
-
+    console.log(socket.id + " " + PORT);
     const filter = new Filter();
     if (filter.isProfane(message)) {
       return callback("Profanity is not allowed");
