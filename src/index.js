@@ -23,17 +23,15 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/api/test", (req, res) => {
-  console.log(req.headers);
-  console.log(req.socket.remoteAddress);
   res.json({
     headers: req.headers,
     remoteAddress: req.socket.remoteAddress,
+    PORT,
   });
 });
 
 io.on("connection", (socket) => {
-  console.log("New websocket connection");
-
+  console.log(socket);
   socket.on("join", (userInfo, callback) => {
     const { error, user } = addUser({ id: socket.id, ...userInfo });
     if (error) return callback(error);
